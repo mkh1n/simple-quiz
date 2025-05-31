@@ -1,0 +1,14 @@
+[
+    {
+      "type": "options",
+      "question": "Сколько будет 2 + 2?",
+      "options": ["3", "4", "5", "6"],
+      "correctAnswer": "4"
+    },
+    {
+      "type": "text",
+      "question": "Какой язык программирования используется в этом проекте?",
+      "correctAnswer": "JavaScript"
+    }
+  ]
+  
