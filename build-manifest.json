@@ -1,0 +1,43 @@
+{
+  "polyfillFiles": [
+    "static/chunks/polyfills-42372ed130431b0a.js"
+  ],
+  "devFiles": [],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [
+    "static/N7LFc68nk2ECdcwBfpOge/_buildManifest.js",
+    "static/N7LFc68nk2ECdcwBfpOge/_ssgManifest.js"
+  ],
+  "rootMainFiles": [],
+  "rootMainFilesTree": {},
+  "pages": {
+    "/": [
+      "static/chunks/webpack-3a210c92ecb06ead.js",
+      "static/chunks/framework-2f335d22a7318891.js",
+      "static/chunks/main-9794c8d136154d2b.js",
+      "static/css/f21897abadcf44d5.css",
+      "static/chunks/pages/index-7441b2c935fe48e1.js"
+    ],
+    "/_app": [
+      "static/chunks/webpack-3a210c92ecb06ead.js",
+      "static/chunks/framework-2f335d22a7318891.js",
+      "static/chunks/main-9794c8d136154d2b.js",
+      "static/css/c1a6ef1e510b0fe8.css",
+      "static/chunks/pages/_app-06bc0f7f01745902.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack-3a210c92ecb06ead.js",
+      "static/chunks/framework-2f335d22a7318891.js",
+      "static/chunks/main-9794c8d136154d2b.js",
+      "static/chunks/pages/_error-41608b100cc61246.js"
+    ],
+    "/main-game-page": [
+      "static/chunks/webpack-3a210c92ecb06ead.js",
+      "static/chunks/framework-2f335d22a7318891.js",
+      "static/chunks/main-9794c8d136154d2b.js",
+      "static/css/80d8d7df07b452bf.css",
+      "static/chunks/pages/main-game-page-3c16e402a44e7960.js"
+    ]
+  },
+  "ampFirstPages": []
+}
