@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 import { useRouter } from "next/router";
 import { useMusic } from '@/MusicContext.js';
 
-export default function Game() {
+export default function MainGamePage() {
     const { isSoundOn, toggleSound } = useMusic();
     const [text, setText] = useState("");
     const [fullText, setFullText] = useState("Привет! Давай поиграем в игру.");
