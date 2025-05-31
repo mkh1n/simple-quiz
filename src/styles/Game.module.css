@@ -1,0 +1,116 @@
+@font-face {
+    font-family: 'Determination';
+    src: url('/determination.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.page {
+    display: flex;
+    padding: 50px;
+    justify-content: center;
+    height: 100vh;
+    background-color: black;
+    font-family: 'Determination', sans-serif;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    grid-row-start: 2;
+}
+.sans{
+    height: 280px;
+}
+.textBox {
+    width: 900px;
+    min-height: 200px;
+    padding: 30px;
+    font-size: 25px;
+    background-color: black;
+    border: solid white 5px;
+}
+.textBox p::before{
+    content: "* ";
+}
+.options{
+    display: flex;
+}
+.input{
+    font-family: 'Determination', sans-serif;
+    background-color: black;
+    padding: 10px 20px;
+    color: yellow;
+    font-size: 20px;
+    border: solid rgb(255, 255, 255) 3px;
+    margin: 0px 10px;
+    outline: none;
+}
+
+.option, .answerButton{
+    font-family: 'Determination', sans-serif;
+    background-color: black;
+    padding: 10px 20px;
+    width: 120px;
+
+    color: yellow;
+    font-size: 20px;
+    border: solid yellow 2px;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+.option:hover, .answerButton:hover{
+    opacity: 0.6;
+}
+.homeButton, .soundButton{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    height: 50px;
+    width: 50px;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+.homeButton:hover, .soundButton:hover{
+    opacity: 0.6;
+}
+.soundButton{
+    left: unset;
+    right: 20px;
+}
+.homeButton img, .soundButton img{
+    width: 50px;
+    height: 50px;
+    filter: invert(1);
+}
+@media (max-width: 768px) {
+    .homeButton, .soundButt, .homeButton img, .soundButton img{
+        height: 30px;
+        width: 30px;
+    }
+    .sans{
+        height: 200px;
+    }
+    .textBox{
+        width: 300px;
+        height: unset;
+        min-height:  120px;
+        padding: 20px
+    }
+    .options{
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-evenly;
+    }
+
+    .page{
+        padding: 20px
+    }
+}
