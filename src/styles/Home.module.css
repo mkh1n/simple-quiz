@@ -7,9 +7,10 @@
   font-display: swap;
 }
 .page {
-  background-color: black;
+  background-color: white;
   display: flex;
   align-items: center;
+  color: black;
   justify-content: center;
   height: 100vh;
   font-family: 'Determination', sans-serif;
@@ -24,23 +25,29 @@
   grid-row-start: 2;
 }
 .main p{
+  color: black;
   font-size: 20px;
 }
 .title{
+  color: black;
   font-size: 100px;
 }
 
 .mainButton{
   padding: 20px 100px;
   font-size: 30px;
-  background-color: black;
-  outline: white 2px;
+  color: black;
+
+  background-color: white;
+  border: solid black 2px;
   font-family: 'Determination', sans-serif;
+  transition: 0.2s;
   cursor: pointer;
 }
 .mainButton:hover{
-  color: yellow;
-}
+  color: rgb(67, 130, 255);
+  background-color: rgb(234, 243, 255);
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}
 
 @media (max-width: 768px) {
   .title{

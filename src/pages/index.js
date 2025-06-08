@@ -21,7 +21,7 @@ export default function Home() {
       <div className={styles.page}>
         <main className={styles.main}>
           <h1 className={styles.title}>Викторина</h1>
-          <p>Проверь свои знания гениальной игры Undertale</p>
+          <p>Проверьте свои знания!</p>
           <button className={styles.mainButton} onClick={handleButtonClick}>Начать</button>
         </main>
       </div>

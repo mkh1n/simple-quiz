@@ -8,7 +8,7 @@ import { useMusic } from '@/MusicContext.js';
 export default function MainGamePage() {
     const { isSoundOn, toggleSound } = useMusic();
     const [text, setText] = useState("");
-    const [fullText, setFullText] = useState("Привет! Давай поиграем в игру.");
+    const [fullText, setFullText] = useState("Привет, я хочу с вами сыграть в игру, проверить ваши знания в области АЙТИ ");
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState([]);
     const [userAnswer, setUserAnswer] = useState("");
@@ -16,18 +16,18 @@ export default function MainGamePage() {
     const [isCorrect, setIsCorrect] = useState(null);
     const [stage, setStage] = useState("greeting");
     const [isTyping, setIsTyping] = useState(true);
-    const [imagePath, setImagePath] = useState("/sans-idle.gif");
+    const [animation, setAnimation] = useState("");
     const textBoxRef = useRef(null);
     const router = useRouter();
 
     const voiceUrl = '/voice.mp3';
     const clickUrl = '/click.mp3';
 
-    const [playVoice, { stop: stopVoice }] = useSound(voiceUrl, { volume: isSoundOn ? 0.5 : 0, loop: true });
+    const [playVoice, { stop: stopVoice }] = useSound(voiceUrl, { volume: isSoundOn ? 0.6 : 0, loop: true });
     const [playClick] = useSound(clickUrl, { volume: isSoundOn ? 1 : 0 });
 
     useEffect(() => {
-        fetch("/undertaleQuestions.json")
+        fetch("/questions.json")
             .then((response) => response.json())
             .then((data) => setQuestions(data));
     }, []);
@@ -55,25 +55,32 @@ export default function MainGamePage() {
     }, [fullText, isTyping, isSoundOn]);
 
     const handleNextStage = () => {
-        setImagePath("/sans-idle.gif");
+        setAnimation("");
         if (stage === "greeting") {
             setStage("question");
             setFullText(questions[currentQuestionIndex]?.question || "");
             setIsTyping(true);
         } else if (stage === "feedback") {
-            if (currentQuestionIndex < questions.length - 1) {
-                setCurrentQuestionIndex(currentQuestionIndex + 1);
-                setStage("question");
-                setFullText(questions[currentQuestionIndex + 1].question);
-                setIsTyping(true);
-                setFeedback("");
-                setUserAnswer("");
-                setIsCorrect(null);
+            if (isCorrect) {
+                if (currentQuestionIndex < questions.length - 1) {
+                    setCurrentQuestionIndex(currentQuestionIndex + 1);
+                    setStage("question");
+                    setFullText(questions[currentQuestionIndex + 1].question);
+                    setIsTyping(true);
+                    setFeedback("");
+                    setUserAnswer("");
+                    setIsCorrect(null);
+                } else {
+                    setStage("end");
+                    setFullText("Отлично! Вы справились! Я в вас не сомневался :000:)))");
+                    setAnimation(styles.winAnimation);
+
+                    setIsTyping(true);
+                }
             } else {
-                setStage("end");
-                setImagePath("/sans-win.gif");
-                setFullText("Спасибо за игру! Вы стали настоящими профи в Андертейл!");
-                setIsTyping(true);
+                setStage("question");
+                setIsTyping(false);
+                setText(questions[currentQuestionIndex].question);
             }
         }
     };
@@ -81,21 +88,17 @@ export default function MainGamePage() {
     const handleAnswerSelection = (selectedAnswer) => {
         playClick();
         const correctAnswer = questions[currentQuestionIndex].correctAnswer;
-        const feedbackText = selectedAnswer === correctAnswer ? "Правильно!" : `Неправильно! Правильный ответ: ${correctAnswer}`;
+        const isAnswerCorrect = selectedAnswer === correctAnswer;
 
-        setIsCorrect(selectedAnswer === correctAnswer);
-        setFeedback(feedbackText);
-        setFullText(feedbackText);
+        setIsCorrect(isAnswerCorrect);
+        setFeedback(isAnswerCorrect ? "Правильно!" : "Неправильно! Подумайте еще раз.");
+        setFullText(isAnswerCorrect ? "Правильно!" : "Неправильно! Подумайте еще раз.");
 
-        if (selectedAnswer === correctAnswer) {
-            setImagePath("/sans-right.gif");
+        if (isAnswerCorrect) {
+            setAnimation(styles.jumpAnimation);
         } else {
-            setImagePath("/sans-wrong.gif");
+            setAnimation(styles.loseAnimation);
         }
-
-        setTimeout(() => {
-            setImagePath("/sans-idle.gif");
-        }, 3000);
 
         setStage("feedback");
         setIsTyping(true);
@@ -106,16 +109,18 @@ export default function MainGamePage() {
         const correctAnswer = questions[currentQuestionIndex].correctAnswer[0];
         const formattedCorrectAnswers = questions[currentQuestionIndex].correctAnswer.map((a) => a.replace(/\s+/g, '').toLowerCase());
         const formattedUserAnswer = userAnswer.replace(/\s+/g, '').toLowerCase();
+        const isAnswerCorrect = formattedCorrectAnswers.includes(formattedUserAnswer);
 
-        const feedbackText = formattedCorrectAnswers.includes(formattedUserAnswer) ? "Правильно!" : `Неправильно! Правильный ответ: ${correctAnswer}`;
-        setIsCorrect(formattedCorrectAnswers.includes(formattedUserAnswer));
-        setFeedback(feedbackText);
-        setFullText(feedbackText);
+        setUserAnswer("");
 
-        if (formattedCorrectAnswers.includes(formattedUserAnswer)) {
-            setImagePath("/sans-right.gif");
+        setIsCorrect(isAnswerCorrect);
+        setFeedback(isAnswerCorrect ? "Правильно!" : "Неправильно! Подумайте еще раз.");
+        setFullText(isAnswerCorrect ? "Правильно!" : "Неправильно! Подумайте еще раз.");
+
+        if (isAnswerCorrect) {
+            setAnimation(styles.jumpAnimation);
         } else {
-            setImagePath("/sans-wrong.gif");
+            setAnimation(styles.loseAnimation);
         }
 
         setStage("feedback");
@@ -153,8 +158,8 @@ export default function MainGamePage() {
                         </button>
                     </div>
                     <img
-                        className={`${styles.sans} ${isCorrect === true ? styles.greenBorder : isCorrect === false ? styles.redBorder : ''}`}
-                        src={imagePath}
+                        className={`${styles.sans} ${animation} ${isCorrect === true ? styles.greenBorder : isCorrect === false ? styles.redBorder : ''}`}
+                        src="/jew.png"
                         alt="loading..."
                     />
                     <div
@@ -177,6 +182,7 @@ export default function MainGamePage() {
                             ) : (
                                 <>
                                     <input
+                                        id="inputField"
                                         type="text"
                                         value={userAnswer}
                                         onChange={(e) => setUserAnswer(e.target.value)}

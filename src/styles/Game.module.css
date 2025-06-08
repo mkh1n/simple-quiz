@@ -11,7 +11,7 @@
     padding: 50px;
     justify-content: center;
     height: 100vh;
-    background-color: black;
+    background-color: white;
     font-family: 'Determination', sans-serif;
 }
 
@@ -19,11 +19,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     grid-row-start: 2;
 }
 .sans{
-    height: 280px;
+    height: 320px;
 }
 .textBox {
     width: 900px;
@@ -32,6 +32,8 @@
     font-size: 25px;
     background-color: black;
     border: solid white 5px;
+    outline: black 5px solid ;
+    color: white;
 }
 .textBox p::before{
     content: "* ";
@@ -43,9 +45,9 @@
     font-family: 'Determination', sans-serif;
     background-color: black;
     padding: 10px 20px;
-    color: yellow;
+    color: white;
     font-size: 20px;
-    border: solid rgb(255, 255, 255) 3px;
+
     margin: 0px 10px;
     outline: none;
 }
@@ -56,9 +58,9 @@
     padding: 10px 20px;
     width: 120px;
 
-    color: yellow;
+    color: white;
     font-size: 20px;
-    border: solid yellow 2px;
+    border: solid black 2px;
     margin: 0px 10px;
     cursor: pointer;
 }
@@ -88,15 +90,74 @@
 .homeButton img, .soundButton img{
     width: 50px;
     height: 50px;
-    filter: invert(1);
 }
+.jumpAnimation {
+    animation: jump 0.5s ease;
+  }
+  
+  .loseAnimation {
+    animation: shake 0.5s ease;
+  }
+
+  .winAnimation{
+  animation: slow 0.5s linear 1.5s, fast 0.1s linear 0.5s, slow2 1s linear 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes slow {
+  from {
+    -webkit-transform: rotate(0deg)
+  }
+  to {
+    -webkit-transform: rotate(-360deg)
+  }
+}
+
+  @keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+    75% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(-45deg)
+    }
+    100% {
+      transform: rotate(45deg)
+    }
+  }
 @media (max-width: 768px) {
     .homeButton, .soundButt, .homeButton img, .soundButton img{
-        height: 30px;
-        width: 30px;
+        height: 40px;
+        width: 40px;
     }
     .sans{
-        height: 200px;
+        height: 242px;
     }
     .textBox{
         width: 300px;

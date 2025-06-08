@@ -7,7 +7,7 @@ export const MusicProvider = ({ children }) => {
   const musicUrl = '/music.mp3';
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [playMusic, { stop: stopMusic }] = useSound(musicUrl, {
-    volume: isSoundOn ? 0.5 : 0,
+    volume: isSoundOn ? 0.4 : 0,
     loop: true
   });
 
